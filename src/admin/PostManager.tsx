@@ -4,6 +4,8 @@ import { commitFile, deleteFile } from './github';
 
 // @ts-ignore
 const rawModules = import.meta.glob('../content/posts/*.mdx', { query: '?raw', import: 'default', eager: true });
+import SimpleMDE from 'react-simplemde-editor';
+import 'easymde/dist/easymde.min.css';
 
 export default function PostManager() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -218,12 +220,18 @@ ${content}
                 </div>
                 <div className="flex-1 flex flex-col">
                   <label className="block font-sans font-semibold text-ink mb-1">Markdown Body</label>
-                  <textarea 
-                    value={content} 
-                    onChange={e => setContent(e.target.value)} 
-                    className="flex-1 w-full p-4 border-2 border-ink rounded-xl font-mono text-sm min-h-[300px] focus:outline-none focus:border-coral resize-none"
-                    placeholder="Write your post here in Markdown..."
-                  />
+                  <div className="flex-1 min-h-[300px] font-sans">
+                    <SimpleMDE 
+                      value={content} 
+                      onChange={setContent} 
+                      options={{
+                        spellChecker: false,
+                        placeholder: "Write your post here...",
+                        status: false,
+                        toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview"]
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               

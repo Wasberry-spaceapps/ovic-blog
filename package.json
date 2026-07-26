@@ -75,5 +75,9 @@
     "vite": "^5.0.0",
     "wouter": "^3.3.5",
     "zod": "^3.0.0"
+  },
+  "dependencies": {
+    "easymde": "^2.21.0",
+    "react-simplemde-editor": "^5.2.0"
   }
 }

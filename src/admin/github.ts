@@ -2,8 +2,8 @@
  * GitHub API Integration for Ovic Bookstore Admin
  */
 
-const REPO_OWNER = 'YOUR_GITHUB_USERNAME'; // TODO: Update this
-const REPO_NAME = 'YOUR_REPO_NAME'; // TODO: Update this
+const REPO_OWNER = 'Wasberry-spaceapps';
+const REPO_NAME = 'ovic-blog';
 
 function getHeaders() {
   const token = localStorage.getItem('github_pat');

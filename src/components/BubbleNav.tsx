@@ -55,32 +55,7 @@ const bubbles: Bubble[] = [
       </svg>
     ),
   },
-  {
-    label: globalContent.bubbleNavReading,
-    path: "/reading",
-    color: "var(--sun)",
-    icon: (
-      <svg aria-hidden="true" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 14 32 L 26 32 L 24 12 L 16 12 Z" fill="var(--cream)" stroke="var(--ink)" strokeWidth="2.5" strokeLinejoin="round" />
-        <path d="M 18 12 L 18 8 C 18 6 22 6 22 8 L 22 12" fill="none" stroke="var(--ink)" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M 12 32 L 28 32" stroke="var(--ink)" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M 20 26 C 22 26 22 22 20 20 C 18 22 18 26 20 26 Z" fill="var(--coral)" stroke="var(--ink)" strokeWidth="2" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    label: globalContent.bubbleNavRecommendations,
-    path: "/recommendations",
-    color: "var(--leaf)",
-    icon: (
-      <svg aria-hidden="true" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 10 30 L 30 30 L 30 24 L 10 24 Z" fill="var(--cream)" stroke="var(--ink)" strokeWidth="2.5" strokeLinejoin="round" />
-        <path d="M 12 24 L 28 24 L 28 18 L 12 18 Z" fill="var(--sun)" stroke="var(--ink)" strokeWidth="2.5" strokeLinejoin="round" />
-        <path d="M 14 18 L 26 18 L 26 12 L 14 12 Z" fill="var(--sky)" stroke="var(--ink)" strokeWidth="2.5" strokeLinejoin="round" />
-        <path d="M 20 15 L 21 17 L 23 17 L 21.5 18.5 L 22 20.5 L 20 19.5 L 18 20.5 L 18.5 18.5 L 17 17 L 19 17 Z" fill="var(--cream)" stroke="var(--ink)" strokeWidth="1.5" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
+
   {
     label: globalContent.bubbleNavContact,
     path: "/hello",
