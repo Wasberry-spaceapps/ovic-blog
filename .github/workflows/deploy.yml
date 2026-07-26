@@ -39,6 +39,9 @@ jobs:
         env:
           BASE_PATH: /ovic-blog/
 
+      - name: Fix SPA routing for GitHub Pages
+        run: cp dist/public/index.html dist/public/404.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
