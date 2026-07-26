@@ -1,0 +1,60 @@
+[
+  {
+    "route": "global",
+    "file": "global.json",
+    "fields": [
+      { "key": "siteTitle", "label": "Global: Site Title (Logo & Loading)" },
+      { "key": "bubbleNavHome", "label": "Nav: Home Bubble Label" },
+      { "key": "bubbleNavShelf", "label": "Nav: Shelf Bubble Label" },
+      { "key": "bubbleNavAbout", "label": "Nav: About Bubble Label" },
+      { "key": "bubbleNavReading", "label": "Nav: Reading Bubble Label" },
+      { "key": "bubbleNavRecommendations", "label": "Nav: Recommendations Bubble Label" },
+      { "key": "bubbleNavContact", "label": "Nav: Contact Bubble Label" }
+    ]
+  },
+  {
+    "route": "/",
+    "file": "home.json",
+    "fields": [
+      { "key": "heroHeading", "label": "Homepage: Hero Heading" }
+    ]
+  },
+  {
+    "route": "/about",
+    "file": "about.json",
+    "fields": [
+      { "key": "pageTitle", "label": "About: Page Title" },
+      { "key": "paragraph1", "label": "About: Paragraph 1" },
+      { "key": "paragraph2", "label": "About: Paragraph 2" },
+      { "key": "paragraph3", "label": "About: Paragraph 3" },
+      { "key": "mascotGreeting", "label": "About: Mascot Greeting" }
+    ]
+  },
+  {
+    "route": "/hello",
+    "file": "contact.json",
+    "fields": [
+      { "key": "pageTitle", "label": "Contact: Page Title" },
+      { "key": "description", "label": "Contact: Description" },
+      { "key": "buttonText", "label": "Contact: Button Text" },
+      { "key": "emailAddress", "label": "Contact: Email Address" }
+    ]
+  },
+  {
+    "route": "/shelf",
+    "file": "shelf.json",
+    "fields": [
+      { "key": "pageTitle", "label": "Shelf: Page Title" },
+      { "key": "readButtonText", "label": "Shelf: Read Button Text" },
+      { "key": "backButtonText", "label": "Shelf: Back Button Text (Post Page)" }
+    ]
+  },
+  {
+    "route": "/recommendations",
+    "file": "recommendations.json",
+    "fields": [
+      { "key": "pageTitle", "label": "Recommendations: Page Title" },
+      { "key": "ratingLabel", "label": "Recommendations: Rating Label" }
+    ]
+  }
+]
