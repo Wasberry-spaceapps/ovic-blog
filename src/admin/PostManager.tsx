@@ -58,9 +58,9 @@ export default function PostManager() {
       const rawContent = rawModules[rawKey] as string;
       
       // Extract just the body by stripping the frontmatter
-      if (rawContent) {
-        const bodyMatch = rawContent.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n([\s\S]*)$/);
-        setContent(bodyMatch ? bodyMatch[1].trim() : rawContent);
+      if (typeof rawContent === 'string') {
+        const body = rawContent.replace(/^---[\s\S]*?---[\r\n]*/, '');
+        setContent(body.trim() || rawContent);
       } else {
         setContent('');
       }
