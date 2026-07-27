@@ -34,6 +34,32 @@ export async function getFileSha(path: string): Promise<string | null> {
   }
 }
 
+export async function getFileContent(path: string): Promise<string | null> {
+  const token = localStorage.getItem('github_pat');
+  if (!token) return null; // Mock mode if no token
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+      headers: getHeaders()
+    });
+    
+    if (res.status === 404) return null; // File doesn't exist yet
+    if (!res.ok) throw new Error(`GitHub API error: ${res.statusText}`);
+    
+    const data = await res.json();
+    // Safely decode base64 utf-8
+    const binaryStr = atob(data.content);
+    const bytes = new Uint8Array(binaryStr.length);
+    for (let i = 0; i < binaryStr.length; i++) {
+        bytes[i] = binaryStr.charCodeAt(i);
+    }
+    return new TextDecoder().decode(bytes);
+  } catch (error) {
+    console.error('Error fetching file content:', error);
+    return null;
+  }
+}
+
 export async function commitFile(path: string, content: string, message: string): Promise<boolean> {
   const token = localStorage.getItem('github_pat');
   

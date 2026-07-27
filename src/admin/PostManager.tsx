@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { getPosts, Post } from '@/lib/posts';
-import { commitFile, deleteFile } from './github';
+import { commitFile, deleteFile, getFileContent } from './github';
 
 // @ts-ignore
 const rawModules = import.meta.glob('../content/posts/*.mdx', { query: '?raw', import: 'default', eager: true });
@@ -37,7 +37,7 @@ export default function PostManager() {
     setPosts(getPosts());
   }, []);
 
-  const handleSelectPost = (slug: string) => {
+  const handleSelectPost = async (slug: string) => {
     setSelectedSlug(slug);
     
     if (slug === 'new') {
@@ -53,12 +53,23 @@ export default function PostManager() {
       setTitle(post.frontmatter.title);
       setDate(post.frontmatter.date);
       setExcerpt(post.frontmatter.excerpt);
+      setContent('Loading content...');
       
-      const rawKey = `../content/posts/${slug}.mdx`;
-      const rawContent = rawModules[rawKey] as string;
+      const githubContent = await getFileContent(`src/content/posts/${slug}.mdx`);
+      
+      let rawContent = githubContent;
+      
+      // Fallback for local testing if githubContent is null (no PAT)
+      if (rawContent === null) {
+        const rawKey = Object.keys(rawModules).find(k => k.includes(`${slug}.mdx`));
+        rawContent = rawKey ? rawModules[rawKey] : '';
+        if (typeof rawContent === 'object' && rawContent !== null) {
+          rawContent = (rawContent as any).default || '';
+        }
+      }
       
       // Extract just the body by stripping the frontmatter
-      if (typeof rawContent === 'string') {
+      if (typeof rawContent === 'string' && rawContent) {
         const body = rawContent.replace(/^---[\s\S]*?---[\r\n]*/, '');
         setContent(body.trim() || rawContent);
       } else {
