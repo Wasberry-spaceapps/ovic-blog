@@ -68,6 +68,20 @@ const bubbles: Bubble[] = [
       </svg>
     ),
   },
+  {
+    label: "Visit Shop",
+    path: "https://www.ovicbookstore.com",
+    color: "var(--leaf)",
+    desktopTransform: "",
+    icon: (
+      <svg aria-hidden="true" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 8 12 L 32 12 L 28 26 L 12 26 Z" fill="var(--cream)" stroke="var(--ink)" strokeWidth="2.5" strokeLinejoin="round" />
+        <path d="M 12 12 L 14 6 L 26 6 L 28 12" fill="none" stroke="var(--ink)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="16" cy="32" r="2.5" fill="var(--ink)" />
+        <circle cx="24" cy="32" r="2.5" fill="var(--ink)" />
+      </svg>
+    ),
+  },
 ];
 
 export function BubbleNav() {
@@ -92,8 +106,17 @@ export function BubbleNav() {
             }
           };
 
+          const isExternal = bubble.path.startsWith('http');
+          
+          const ContentWrapper = ({ children, className }: { children: React.ReactNode, className: string }) => {
+            if (isExternal) {
+              return <a href={bubble.path} target="_blank" rel="noopener noreferrer" className={className}>{children}</a>;
+            }
+            return <Link href={bubble.path} className={className}>{children}</Link>;
+          };
+
           return (
-            <Link href={bubble.path} key={bubble.path} className={`w-full max-w-[180px] aspect-square ${bubble.desktopTransform}`}>
+            <ContentWrapper key={bubble.path} className={`w-full max-w-[180px] aspect-square ${bubble.desktopTransform || ''}`}>
               <motion.div
                 className="relative w-full h-full flex flex-col items-center justify-center cursor-pointer group"
                 whileHover={shouldReduceMotion ? {} : { scale: 1.08 }}
@@ -116,7 +139,7 @@ export function BubbleNav() {
                   </span>
                 </div>
               </motion.div>
-            </Link>
+            </ContentWrapper>
           );
         })}
       </div>

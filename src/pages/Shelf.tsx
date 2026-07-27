@@ -18,27 +18,27 @@ export default function Shelf() {
         <h1 className="font-display text-5xl font-semibold text-ink">{shelfContent.pageTitle}</h1>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {posts.map((post, i) => (
           <Link href={`/shelf/${post.slug}`} key={post.slug}>
             <motion.div
-              className="bg-cream-dark border-[3px] border-ink rounded-[24px] p-6 sm:p-8 cursor-pointer group flex flex-col h-full"
-              style={{ boxShadow: 'var(--shadow-cartoon)' }}
-              whileHover={{ y: -4, boxShadow: 'var(--shadow-cartoon-hover)' }}
+              className="bg-cream-dark border-[3px] border-ink rounded-xl p-4 sm:p-5 cursor-pointer group flex flex-col h-full"
+              style={{ boxShadow: 'var(--shadow-cartoon-sm)' }}
+              whileHover={{ y: -2, boxShadow: 'var(--shadow-cartoon)' }}
               transition={{ duration: 0.2 }}
             >
-              <h2 className="font-display text-2xl font-semibold text-ink mb-3 group-hover:text-coral transition-colors">
+              <h2 className="font-display text-lg sm:text-xl font-semibold text-ink mb-2 group-hover:text-coral transition-colors line-clamp-2">
                 {post.frontmatter.title}
               </h2>
-              <div className="font-sans text-sm text-ink-light mb-4 font-medium">
+              <div className="font-sans text-xs text-ink-light mb-3 font-medium">
                 {new Date(post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
               </div>
-              <p className="font-sans text-ink leading-relaxed flex-1">
+              <p className="font-sans text-sm text-ink leading-relaxed flex-1 line-clamp-3">
                 {post.frontmatter.excerpt}
               </p>
               
-              <div className="mt-6 flex justify-end">
-                <span className="inline-flex items-center text-coral font-display font-semibold group-hover:translate-x-1 transition-transform">
+              <div className="mt-4 flex justify-end">
+                <span className="inline-flex items-center text-coral text-sm font-display font-semibold group-hover:translate-x-1 transition-transform">
                   {shelfContent.readButtonText} <span className="ml-1">→</span>
                 </span>
               </div>

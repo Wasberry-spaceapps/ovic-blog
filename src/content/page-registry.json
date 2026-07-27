@@ -7,8 +7,6 @@
       { "key": "bubbleNavHome", "label": "Nav: Home Bubble Label" },
       { "key": "bubbleNavShelf", "label": "Nav: Shelf Bubble Label" },
       { "key": "bubbleNavAbout", "label": "Nav: About Bubble Label" },
-      { "key": "bubbleNavReading", "label": "Nav: Reading Bubble Label" },
-      { "key": "bubbleNavRecommendations", "label": "Nav: Recommendations Bubble Label" },
       { "key": "bubbleNavContact", "label": "Nav: Contact Bubble Label" }
     ]
   },
@@ -47,14 +45,6 @@
       { "key": "pageTitle", "label": "Shelf: Page Title" },
       { "key": "readButtonText", "label": "Shelf: Read Button Text" },
       { "key": "backButtonText", "label": "Shelf: Back Button Text (Post Page)" }
-    ]
-  },
-  {
-    "route": "/recommendations",
-    "file": "recommendations.json",
-    "fields": [
-      { "key": "pageTitle", "label": "Recommendations: Page Title" },
-      { "key": "ratingLabel", "label": "Recommendations: Rating Label" }
     ]
   }
 ]

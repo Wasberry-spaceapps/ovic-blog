@@ -70,14 +70,21 @@ export default function AdminApp() {
 
   return (
     <div className="min-h-screen bg-cream flex flex-col">
+      {/* Quota Warning Banner */}
+      <div className="bg-sun px-4 py-2 text-center border-b-2 border-ink">
+        <p className="font-sans font-semibold text-ink text-sm sm:text-base">
+          ⚠️ <strong>Notice:</strong> Please limit your edits to avoid exhausting your free GitHub Actions quota (2000 mins/month). Make all changes at once before saving!
+        </p>
+      </div>
+
       {/* Admin Nav */}
-      <header className="bg-white border-b-2 border-ink py-4 px-6 flex justify-between items-center sticky top-0 z-50">
-        <div className="flex items-center gap-6">
+      <header className="bg-white border-b-2 border-ink py-4 px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 sticky top-0 z-50">
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
           <h1 className="font-display font-semibold text-xl text-ink tracking-wide">Ovic Admin</h1>
-          <nav className="flex gap-4">
+          <nav className="flex flex-wrap justify-center gap-2 sm:gap-4">
             <button
               onClick={() => setLocation('/posts')}
-              className={`font-sans font-semibold px-4 py-2 rounded-lg transition-colors ${
+              className={`font-sans font-semibold px-3 py-2 rounded-lg transition-colors text-sm sm:text-base ${
                 location.startsWith('/posts') || location === '/' ? 'bg-ink text-white' : 'text-ink hover:bg-cream-dark'
               }`}
             >
@@ -85,7 +92,7 @@ export default function AdminApp() {
             </button>
             <button
               onClick={() => setLocation('/content')}
-              className={`font-sans font-semibold px-4 py-2 rounded-lg transition-colors ${
+              className={`font-sans font-semibold px-3 py-2 rounded-lg transition-colors text-sm sm:text-base ${
                 location.startsWith('/content') ? 'bg-ink text-white' : 'text-ink hover:bg-cream-dark'
               }`}
             >
@@ -93,7 +100,7 @@ export default function AdminApp() {
             </button>
             <button
               onClick={() => setLocation('/settings')}
-              className={`font-sans font-semibold px-4 py-2 rounded-lg transition-colors ${
+              className={`font-sans font-semibold px-3 py-2 rounded-lg transition-colors text-sm sm:text-base ${
                 location.startsWith('/settings') ? 'bg-ink text-white' : 'text-ink hover:bg-cream-dark'
               }`}
             >
@@ -102,7 +109,7 @@ export default function AdminApp() {
           </nav>
         </div>
         <div className="flex items-center gap-4">
-          <a href="/" target="_blank" className="font-sans font-semibold text-coral hover:underline">View Site +'</a>
+          <a href="/" target="_blank" className="font-sans font-semibold text-coral hover:underline">View Site ↗</a>
           <button onClick={handleLogout} className="font-sans font-medium text-ink-light hover:text-ink">Logout</button>
         </div>
       </header>

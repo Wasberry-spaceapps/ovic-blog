@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { getPosts, Post } from '@/lib/posts';
 import { commitFile, deleteFile } from './github';
 
@@ -19,6 +19,18 @@ export default function PostManager() {
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
+
+  // Memoize SimpleMDE callbacks and options to prevent focus loss
+  const handleContentChange = useCallback((value: string) => {
+    setContent(value);
+  }, []);
+
+  const mdeOptions = useMemo(() => ({
+    spellChecker: false,
+    placeholder: "Write your post here...",
+    status: false,
+    toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview"] as any
+  }), []);
 
   // Initial load
   useEffect(() => {
@@ -47,7 +59,7 @@ export default function PostManager() {
       
       // Extract just the body by stripping the frontmatter
       if (rawContent) {
-        const bodyMatch = rawContent.match(/^---\n[\s\S]*?\n---\n([\s\S]*)$/);
+        const bodyMatch = rawContent.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n([\s\S]*)$/);
         setContent(bodyMatch ? bodyMatch[1].trim() : rawContent);
       } else {
         setContent('');
@@ -128,9 +140,9 @@ ${content}
   };
 
   return (
-    <div className="flex h-[calc(100vh-120px)] overflow-hidden gap-6">
+    <div className="flex flex-col lg:flex-row min-h-screen lg:min-h-0 lg:h-[calc(100vh-120px)] gap-6">
       {/* Sidebar List */}
-      <div className="w-1/3 max-w-sm bg-white border-r-2 border-ink p-4 flex flex-col h-full rounded-2xl border-2 shadow-[4px_4px_0px_0px_var(--ink)]">
+      <div className="w-full lg:w-1/3 max-w-none lg:max-w-sm bg-white border-r-2 lg:border-r-2 border-ink p-4 flex flex-col h-auto lg:h-full rounded-2xl border-2 shadow-[4px_4px_0px_0px_var(--ink)]">
         <div className="flex justify-between items-center mb-6">
           <h2 className="font-display text-2xl font-semibold text-ink">Posts</h2>
           <button 
@@ -141,7 +153,7 @@ ${content}
           </button>
         </div>
         
-        <div className="flex-1 overflow-y-auto pr-2 space-y-2">
+        <div className="flex-1 overflow-y-auto pr-2 space-y-2 max-h-[30vh] lg:max-h-full">
           {posts.map(post => (
             <div 
               key={post.slug}
@@ -190,8 +202,8 @@ ${content}
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto pr-4 flex gap-6">
-              <div className="w-1/2 flex flex-col gap-4">
+            <div className="flex-1 overflow-y-auto pr-2 lg:pr-4 flex flex-col xl:flex-row gap-6">
+              <div className="w-full xl:w-1/2 flex flex-col gap-4">
                 <div>
                   <label className="block font-sans font-semibold text-ink mb-1">Title</label>
                   <input 
@@ -223,21 +235,16 @@ ${content}
                   <div className="flex-1 min-h-[300px] font-sans">
                     <SimpleMDE 
                       value={content} 
-                      onChange={setContent} 
-                      options={{
-                        spellChecker: false,
-                        placeholder: "Write your post here...",
-                        status: false,
-                        toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview"]
-                      }}
+                      onChange={handleContentChange} 
+                      options={mdeOptions}
                     />
                   </div>
                 </div>
               </div>
               
-              <div className="w-1/2 flex flex-col">
+              <div className="w-full xl:w-1/2 flex flex-col mt-6 xl:mt-0">
                  <label className="block font-sans font-semibold text-ink mb-1">Preview (Raw Markdown Structure)</label>
-                 <div className="flex-1 w-full p-6 border-2 border-ink/20 rounded-xl bg-cream-dark overflow-y-auto prose prose-p:font-sans prose-headings:font-display">
+                 <div className="flex-1 w-full p-4 lg:p-6 border-2 border-ink/20 rounded-xl bg-cream-dark overflow-y-auto min-h-[300px] prose prose-p:font-sans prose-headings:font-display">
                     <h1>{title || 'Post Title'}</h1>
                     <p><em>{excerpt || 'Post excerpt will appear here.'}</em></p>
                     <hr />
